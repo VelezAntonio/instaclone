@@ -36,14 +36,16 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.action_home:
                         fragment=new PostsFragment();
-                        return true;
+                        break;
                     case R.id.action_compose:
                         fragment=new ComposeFragment();
-                        return true;
+                        break;
                     case R.id.action_profile:
                         fragment=new ProfileFragment();
-                        return true;
-                    default: break;
+                        break;
+                        default:
+                            fragment= new ProfileFragment();
+                            break;
                 }
                 fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit();
 

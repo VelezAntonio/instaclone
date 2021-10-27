@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.instaclone.Post;
 import com.example.instaclone.PostsAdapter;
@@ -29,6 +30,8 @@ public class PostsFragment extends Fragment {
     private RecyclerView rvPosts;
     protected PostsAdapter adapter;
     protected List<Post>allPosts;
+    SwipeRefreshLayout swipeContainer;
+
     public PostsFragment() {
         // Required empty public constructor
     }
@@ -51,7 +54,23 @@ public class PostsFragment extends Fragment {
 
         rvPosts.setAdapter(adapter);
         rvPosts.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        swipeContainer = view.findViewById(R.id.swipeContainer);
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Log.i(TAG,"fetching new data");
+                queryPosts();
+
+            }
+        });
         queryPosts();
+
+
     }
         protected void queryPosts() {
             ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
@@ -68,8 +87,10 @@ public class PostsFragment extends Fragment {
                     for(Post post : posts){
                         Log.i(TAG,"Post: "+ post.getDescription() +",username: "+ post.getUser().getUsername());
                     }
+                    allPosts.clear();
                     allPosts.addAll(posts);
                     adapter.notifyDataSetChanged();
+                    swipeContainer.setRefreshing(false);
                 }
             });
         }
