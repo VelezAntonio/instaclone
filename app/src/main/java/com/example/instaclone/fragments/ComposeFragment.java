@@ -58,19 +58,19 @@ public class ComposeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        btnLogout=view.findViewById(R.id.btnLogout);
+
         etDescription=view.findViewById(R.id.etDescription);
         btnCaptureImg=view.findViewById(R.id.btnCaptureImg);
         ivPostImage=view.findViewById(R.id.ivPostImage);
         btnSubmit=view.findViewById(R.id.btnSubmit);
 
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.i(TAG,"onClick log out button");
-
-            }
-        });
+//        btnLogout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Log.i(TAG,"onClick log out button");
+//
+//            }
+//        });
         
         btnCaptureImg.setOnClickListener(new View.OnClickListener() {
             @Override

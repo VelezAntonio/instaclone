@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Fragment fragment;//????
+                Fragment fragment;
                 switch (item.getItemId()) {
                     case R.id.action_home:
                         fragment=new PostsFragment();
